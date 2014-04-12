@@ -1,4 +1,4 @@
-var Game = (function() {
+var Board = (function() {
   var constructor = function() {
     this.board = [
       [0, 0, 0, 0, 0],
@@ -45,13 +45,10 @@ var Game = (function() {
   return constructor;
 })();
 
-var game = new Game();
+var board = new Board();
 
 // every game starts with a 2 and a 4
-var coords = game.get_tile_coords(game.select_random_empty_tile());
-game.board[coords.y][coords.x] = 2;
+board.set_random_tile(2);
+board.set_random_tile(4);
 
-var coords = game.get_tile_coords(game.select_random_empty_tile());
-game.board[coords.y][coords.x] = 4;
-
-console.log(JSON.stringify(game.board));
+console.log(JSON.stringify(board.get_board()));
