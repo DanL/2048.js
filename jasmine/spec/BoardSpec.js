@@ -51,7 +51,7 @@ describe('Board', function() {
     });
   });
 
-  describe('#get_tile', function() {
+  describe('#get_tile_coords', function() {
     it('returns the x and y coordinates of the first tile', function() {
       expect(board.get_tile_coords(0)).toEqual({ x: 0, y: 0 });
     });
