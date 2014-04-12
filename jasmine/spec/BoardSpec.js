@@ -40,7 +40,7 @@ describe('Board', function() {
   });
 
   describe('#find_empty_nodes', function() {
-    it('should return an array with 3 integers', function() {
+    it('should return an array with the index of each empty node', function() {
       expect(board.find_empty_nodes().length).toEqual(25);
     });
   });
