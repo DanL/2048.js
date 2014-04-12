@@ -110,6 +110,7 @@ describe('Game', function() {
       spyOn(game.board, 'collapse_right').and.callThrough();
       spyOn(game.board, 'fold_right').and.callThrough();
       spyOn(game.board, 'rotate_ccw').and.callThrough();
+      spyOn(game.board, 'flip_horizontally').and.callThrough();
       game.down();
       expect(game.board.rotate_cw).toHaveBeenCalled();
       expect(game.board.collapse_right).toHaveBeenCalled();
@@ -117,6 +118,7 @@ describe('Game', function() {
       // Not sure how to assert that #collapse_right gets called again.
       // expect(game.board.collapse_right).toHaveBeenCalled();
       expect(game.board.rotate_cw).toHaveBeenCalled();
+      expect(game.board.flip_horizontally).toHaveBeenCalled();
     });
   })
 });
