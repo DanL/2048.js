@@ -106,22 +106,6 @@ var Board = (function() {
 
         return row;
       });
-    },
-
-    // collapses the board, performs a merge, then collapses again
-    // to account for space left by the merge
-    merge_left: function() {
-      this.collapse_left();
-      this.fold_left();
-      this.collapse_left();
-    },
-
-    // collapses the board, performs a merge, then collapses again
-    // to account for space left by the merge
-    merge_right: function() {
-      this.collapse_right();
-      this.fold_right();
-      this.collapse_right();
     }
   };
 

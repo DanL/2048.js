@@ -17,11 +17,15 @@ var Game = (function() {
     },
 
     left: function() {
-      this.board.merge_left();
+      this.board.collapse_left();
+      this.board.fold_left();
+      this.board.collapse_left();
     },
 
     right: function() {
-      this.board.merge_right();
+      this.board.collapse_right();
+      this.board.fold_right();
+      this.board.collapse_right();
     }
   };
 

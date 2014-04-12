@@ -159,36 +159,4 @@ describe('Board', function() {
       expect(board.board).toEqual(after);
     });
   });
-
-  describe('#merge_left', function() {
-    beforeEach(function() {
-      spyOn(board, 'collapse_left').and.callThrough();
-      spyOn(board, 'fold_left').and.callThrough();
-    });
-
-    it('collapses, folds, and collapses again', function() {
-      board.merge_left();
-      expect(board.collapse_left).toHaveBeenCalled();
-      expect(board.fold_left).toHaveBeenCalled();
-
-      // Not sure how to assert that this gets called again.
-      // expect(board.collapse_left).toHaveBeenCalled();
-    });
-  });
-
-  describe('#merge_right', function() {
-    beforeEach(function() {
-      spyOn(board, 'collapse_right').and.callThrough();
-      spyOn(board, 'fold_right').and.callThrough();
-    });
-
-    it('collapses, folds, and collapses again', function() {
-      board.merge_right();
-      expect(board.collapse_right).toHaveBeenCalled();
-      expect(board.fold_right).toHaveBeenCalled();
-
-      // Not sure how to assert that this gets called again.
-      // expect(board.collapse_right).toHaveBeenCalled();
-    });
-  });
 });

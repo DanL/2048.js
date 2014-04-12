@@ -31,17 +31,25 @@ describe('Game', function() {
 
   describe('#left', function() {
     it('merges tiles left', function() {
-      spyOn(game.board, 'merge_left').and.callThrough();
+      spyOn(game.board, 'collapse_left').and.callThrough();
+      spyOn(game.board, 'fold_left').and.callThrough();
       game.left();
-      expect(game.board.merge_left).toHaveBeenCalled();
+      expect(game.board.collapse_left).toHaveBeenCalled();
+      expect(game.board.fold_left).toHaveBeenCalled();
+      // Not sure how to assert that #collapse_left gets called again.
+      // expect(game.board.collapse_left).toHaveBeenCalled();
     });
   });
 
   describe('#right', function() {
     it('merges tiles right', function() {
-      spyOn(game.board, 'merge_right').and.callThrough();
+      spyOn(game.board, 'collapse_right').and.callThrough();
+      spyOn(game.board, 'fold_right').and.callThrough();
       game.right();
-      expect(game.board.merge_right).toHaveBeenCalled();
+      expect(game.board.collapse_right).toHaveBeenCalled();
+      expect(game.board.fold_right).toHaveBeenCalled();
+      // Not sure how to assert that #collapse_right gets called again.
+      // expect(game.board.collapse_right).toHaveBeenCalled();
     });
   });
 });
