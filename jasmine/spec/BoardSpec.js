@@ -27,7 +27,7 @@ describe('Board', function() {
   describe('#contains', function() {
     describe('when the board contains a specified integer', function() {
       it('returns true', function() {
-        board.set_random_tile(2);
+        board.set_random_empty_tile(2);
         expect(board.contains(2)).toEqual(true);
       });
     });
