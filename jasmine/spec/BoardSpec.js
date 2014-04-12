@@ -61,9 +61,9 @@ describe('Board', function() {
     });
   });
 
-  describe('#set_random_tile', function() {
+  describe('#set_random_empty_tile', function() {
     it('sets a random tile to the specified integer', function() {
-      board.set_random_tile(2);
+      board.set_random_empty_tile(2);
       expect(_.chain(board).flatten().contains(2).value()).toEqual(true);
     });
   });
