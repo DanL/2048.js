@@ -169,7 +169,7 @@ describe('Board', function() {
     it('collapses, folds, and collapses again', function() {
       board.merge_left();
       expect(board.collapse_left).toHaveBeenCalled();
-      expect(board.fold).toHaveBeenCalled();
+      expect(board.fold_left).toHaveBeenCalled();
 
       // Not sure how to assert that this gets called again.
       // expect(board.collapse_left).toHaveBeenCalled();
