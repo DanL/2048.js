@@ -14,6 +14,10 @@ var Board = (function() {
       return this.board;
     },
 
+    contains: function(value) {
+      return _.chain(this.board).flatten().contains(value).value();
+    },
+
     find_empty_nodes: function() {
       return _.flatten(this.board).reduce(function(memo, value, index) {
         if(value === 0) {

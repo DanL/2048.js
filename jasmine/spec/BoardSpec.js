@@ -5,7 +5,7 @@ describe('Board', function() {
     board = new Board();
   });
 
-  describe('the board', function() {
+  describe('#get_board', function() {
     function count_tiles(board) {
       var tiles = 0;
       for(var y = 0; y < board.length; y++) {
@@ -21,6 +21,21 @@ describe('Board', function() {
 
     it('should have 25 tiles', function() {
       expect(count_tiles(board.get_board())).toEqual(25);
+    });
+  });
+
+  describe('#contains', function() {
+    describe('when the board contains a specified integer', function() {
+      it('returns true', function() {
+        board.set_random_tile(2);
+        expect(board.contains(2)).toEqual(true);
+      });
+    });
+
+    describe('when the board does not contain a specified integer', function() {
+      it('returns false', function() {
+        expect(board.contains(2)).toEqual(false);
+      });
     });
   });
 
