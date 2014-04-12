@@ -45,6 +45,36 @@ describe('Board', function() {
     });
   });
 
+  describe('#has_empty_tile', function() {
+    describe('when there is an empty tile', function() {
+      it('returns true', function() {
+        board.board = [
+          [0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0]
+        ];
+
+        expect(board.has_empty_tile()).toEqual(true);
+      });
+    });
+
+    describe('when there is not an empty tile', function() {
+      it('return false', function() {
+        board.board = [
+          [2, 2, 2, 2, 2],
+          [2, 2, 2, 2, 2],
+          [2, 2, 2, 2, 2],
+          [2, 2, 2, 2, 2],
+          [2, 2, 2, 2, 2]
+        ];
+
+        expect(board.has_empty_tile()).toEqual(false);
+      });
+    });
+  })
+
   describe('#select_random_empty_tile', function() {
     it('should return a random empty tile', function() {
       expect(board.select_random_empty_tile()).toBeGreaterThan(0);

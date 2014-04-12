@@ -36,10 +36,31 @@ describe('Game', function() {
       expect(game.left).toHaveBeenCalled();
     });
 
-    it('spawns a random tile', function() {
-      spyOn(game.board, 'set_random_empty_tile').and.callThrough();
-      game.move('left');
-      expect(game.board.set_random_empty_tile).toHaveBeenCalledWith(2);
+    describe('when the board has an empty tile', function() {
+      it('spawns a random tile', function() {
+        spyOn(game.board, 'set_random_empty_tile').and.callThrough();
+        game.move('left');
+        expect(game.board.set_random_empty_tile).toHaveBeenCalledWith(2);
+      });
+
+      it('returns true', function() {
+        expect(game.move('left')).toEqual(true);
+      });
+    });
+
+    describe('when the board has no empty tiles', function() {
+      it('returns false', function() {
+        // this board has no left-mergeable tiles
+        game.board.board = [
+          [2, 4, 8, 16, 32],
+          [2, 4, 8, 16, 32],
+          [2, 4, 8, 16, 32],
+          [2, 4, 8, 16, 32],
+          [2, 4, 8, 16, 32]
+        ];
+
+        expect(game.move('left')).toEqual(false);
+      });
     });
   });
 

@@ -46,6 +46,11 @@ var Board = (function() {
       return { x: x, y: y };
     },
 
+    // predicate to determine whether there are any empty tiles
+    has_empty_tile: function() {
+      return this.contains(0);
+    },
+
     // sets a random empty file to the given integer
     set_random_empty_tile: function(number) {
       var coords = this.get_tile_coords(this.select_random_empty_tile());

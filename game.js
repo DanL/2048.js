@@ -16,10 +16,16 @@ var Game = (function() {
       this.board.set_random_empty_tile(4);
     },
 
-    // decouples shifting the board from spawning a new tile
+    // if this returns false, the game is over
     move: function(direction) {
       this[direction]();
-      this.board.set_random_empty_tile(2);
+
+      if(this.board.has_empty_tile()) {
+        this.board.set_random_empty_tile(2);
+        return true;
+      }
+
+      return false;
     },
 
     left: function() {
