@@ -94,22 +94,22 @@ describe('Board', function() {
   describe('#fold_left', function() {
     it('merges all tiles one space to the left', function() {
       board.board = [
-        [2, 2, 0, 0, 0],
-        [2, 4, 0, 0, 0],
+        [2, 2, 2, 0, 0],
+        [2, 4, 0, 4, 0],
         [0, 8, 8, 0, 0],
         [0, 0, 4, 4, 0],
         [0, 0, 0, 0, 8]
       ];
 
       var after = [
-        [4,  0, 0, 0, 0],
-        [2,  4, 0, 0, 0],
+        [4,  0, 2, 0, 0],
+        [2,  4, 0, 4, 0],
         [0, 16, 0, 0, 0],
         [0,  0, 8, 0, 0],
         [0,  0, 0, 0, 8]
       ];
 
-      board.fold_left();
+      board.fold();
       expect(board.board).toEqual(after);
     });
   });
@@ -122,7 +122,7 @@ describe('Board', function() {
 
     it('collapses, folds, and collapses again', function() {
       expect(board.collapse_left).toHaveBeenCalled();
-      expect(board.fold_left).toHaveBeenCalled();
+      expect(board.fold).toHaveBeenCalled();
 
       // Not sure how to assert that this gets called again.
       // expect(board.collapse_left).toHaveBeenCalled();
