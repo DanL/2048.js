@@ -45,7 +45,7 @@ describe('Board', function() {
     });
   });
 
-  describe('#select_random_tile', function() {
+  describe('#select_random_empty_tile', function() {
     it('should return a random empty tile', function() {
       expect(board.select_random_empty_tile()).toBeGreaterThan(0);
     });
