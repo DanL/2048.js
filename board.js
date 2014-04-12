@@ -63,7 +63,30 @@ var Board = (function() {
     },
 
     // merges tiles into their immediate identical left neighbor
-    fold_left: function() {},
+    fold: function(right) {
+      // when folding left, we need to get the rightside tile
+      // when folding right, we need to get the leftside tile
+      var nearest_index = function(integer) {
+        return right
+          ? integer - 1
+          : integer + 1;
+      };
+
+      this.board = _.map(this.board, function(row) {
+        // iterates over each tile
+        for(var x = 0; x < row.length; x++) {
+          // compares against the tile immediately to the right
+          if(row[x] === row[nearest_index(x)]) {
+            row[x] *= 2;
+            // unsets the next tile, so that when the
+            // pointer advances, it won't compute again
+            row[x + 1] = 0;
+          }
+        }
+
+        return row;
+      });
+    },
 
     // collapses the board, performs a merge, then collapses again
     // to account for space left by the merge
