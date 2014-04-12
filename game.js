@@ -16,6 +16,11 @@ var Game = (function() {
       this.board.set_random_empty_tile(4);
     },
 
+    // checks to see whether you've lost
+    has_possible_move: function() {
+      return this.board.has_possible_move();
+    },
+
     // if this returns false, the game is over
     move: function(direction) {
       var original_board = this.board.board;
@@ -23,7 +28,8 @@ var Game = (function() {
       this[direction]();
 
       if(this.board.has_empty_tile()) {
-        if(_.difference(this.board.board, original_board).length > 0) {
+        // TODO: test this when moving up/down
+        if(this.board.board.join() != original_board.join()) {
           this.board.set_random_empty_tile(2);
         }
 
@@ -54,12 +60,11 @@ var Game = (function() {
     },
 
     down: function() {
-      this.board.rotate_cw();
+      this.board.rotate_ccw();
       this.board.collapse_right();
       this.board.fold_right();
       this.board.collapse_right();
-      this.board.rotate_ccw();
-      this.board.flip_horizontally();
+      this.board.rotate_cw();
     }
   };
 

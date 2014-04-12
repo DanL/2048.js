@@ -29,6 +29,14 @@ describe('Game', function() {
     });
   });
 
+  describe('#has_possible_move', function() {
+    it('checks whether there are any possible moves', function() {
+      spyOn(game.board, 'has_possible_move');
+      game.has_possible_move();
+      expect(game.board.has_possible_move).toHaveBeenCalled();
+    });
+  });
+
   describe('#move', function() {
     it('moves the board left', function() {
       spyOn(game, 'left').and.callThrough();
@@ -120,15 +128,13 @@ describe('Game', function() {
       spyOn(game.board, 'collapse_right').and.callThrough();
       spyOn(game.board, 'fold_right').and.callThrough();
       spyOn(game.board, 'rotate_ccw').and.callThrough();
-      spyOn(game.board, 'flip_horizontally').and.callThrough();
       game.down();
-      expect(game.board.rotate_cw).toHaveBeenCalled();
+      expect(game.board.rotate_ccw).toHaveBeenCalled();
       expect(game.board.collapse_right).toHaveBeenCalled();
       expect(game.board.fold_right).toHaveBeenCalled();
       // Not sure how to assert that #collapse_right gets called again.
       // expect(game.board.collapse_right).toHaveBeenCalled();
       expect(game.board.rotate_cw).toHaveBeenCalled();
-      expect(game.board.flip_horizontally).toHaveBeenCalled();
     });
   })
 });

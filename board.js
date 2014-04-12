@@ -127,8 +127,35 @@ var Board = (function() {
       });
     },
 
-    flip_horizontally: function() {
-      this.board = this.board.reverse();
+    has_possible_move: function() {
+      // always has a possible move if a tile is empty
+      if(this.has_empty_tile()) return true;
+
+      var y_length = this.board.length;
+      for(var y = 0; y < y_length; y++) {
+        var x_length = this.board[y].length;
+        for(var x = 0; x < x_length; x++) {
+          var current = this.board[y][x];
+          // above
+          if(y > 0 && this.board[y - 1][x] === current) {
+            return true;
+          }
+          // left
+          else if(x > 0 && this.board[y][x - 1] === current) {
+            return true;
+          }
+          // under
+          else if(y < y_length && this.board[y + 1][x] === current) {
+            return true;
+          }
+          // right
+          else if(x < x_length && this.board[y][x + 1] === current) {
+            return true;
+          }
+
+          return false;
+        }
+      }
     }
   };
 

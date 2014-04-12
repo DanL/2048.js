@@ -7,13 +7,70 @@
   <script type="text/javascript" src="board.js"></script>
   <script type="text/javascript" src="game.js"></script>
 
+  <script type="text/javascript" src="jquery-2.1.0.min.js"></script>
+
   <script type="text/javascript">
+    function generate_html(board) {
+      return _.flatten(board).map(function(number) {
+        if(number === 0) number = '&nbsp;';
+        return '<div>' + number + '</div>';
+      });
+    }
+
+    function update_page() {
+      $('#board').html(generate_html(game.get_board()));
+    }
+
     var game = new Game();
     game.start();
 
-    console.log(JSON.stringify(game.get_board()));
+    $(document).ready(function() {
+      update_page();
+
+      $(document).on('keyup', function(e) {
+        // prevent this from running on invalid keys
+        if(e.which < 37 || e.which > 40) return;
+
+        switch(e.which) {
+          case 37:
+            game.move('left');
+            break;
+          case 38:
+            game.move('up');
+            break;
+          case 39:
+            game.move('right');
+            break;
+          case 40:
+            game.move('down');
+            break;
+        }
+
+        // TODO: fix this logic
+        if(!game.has_possible_move()) {
+          alert('Sorry, you lost!');
+        }
+        else {
+          // update regardless of whether the board has changed
+          update_page();
+        }
+      });
+    });
   </script>
+
+  <style type="text/css">
+    * { color: #000; font-family: monospace; font-size: 12pt; }
+    body { background-color: #fff; cursor: default;}
+    #board { width: 250px; height: 250px; margin: 50px; }
+      #board ::selection { background-color: transparent; }
+      #board div {
+        background-color: #eee;
+        width: 40px; height: 40px; margin: 5px; display: inline-block;
+        text-align: center; padding-top: 11px; box-sizing: border-box;
+      }
+  </style>
 </head>
 <body>
+  <div id="board"></div>
 </body>
 </html>

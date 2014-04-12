@@ -236,26 +236,31 @@ describe('Board', function() {
     });
   });
 
-  describe('#flip_horizontally', function() {
-    it('flips the board horizontally', function() {
+  describe('when there is a possible move', function() {
+    it('returns true', function() {
       board.board = [
-        [2, 2, 2, 0, 0],
-        [2, 4, 0, 4, 0],
-        [0, 8, 8, 0, 0],
-        [0, 0, 4, 4, 0],
-        [0, 0, 0, 0, 8]
+        [2, 2, 0, 0, 0],
+        [2, 2, 0, 0, 0],
+        [2, 2, 0, 0, 0],
+        [2, 2, 0, 0, 0],
+        [2, 2, 0, 0, 0]
       ];
 
-      var after = [
-        [0, 0, 0, 0, 8],
-        [0, 0, 4, 4, 0],
-        [0, 8, 8, 0, 0],
-        [2, 4, 0, 4, 0],
-        [2, 2, 2, 0, 0]
+      expect(board.has_possible_move()).toEqual(true);
+    });
+  });
+
+  describe('when there is not a possible move', function() {
+    it('returns false', function() {
+      board.board = [
+        [2, 4, 2, 4, 2],
+        [4, 2, 4, 2, 4],
+        [2, 4, 2, 4, 2],
+        [4, 2, 4, 2, 4],
+        [2, 4, 2, 4, 2]
       ];
 
-      board.flip_horizontally();
-      expect(board.board).toEqual(after);
+      expect(board.has_possible_move()).toEqual(false);
     });
   });
 });
