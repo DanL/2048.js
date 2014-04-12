@@ -159,4 +159,50 @@ describe('Board', function() {
       expect(board.board).toEqual(after);
     });
   });
+
+  describe('#rotate_ccw', function() {
+    it('rotates the board ccw', function() {
+      board.board = [
+        [2, 2, 2, 0, 0],
+        [2, 4, 0, 4, 0],
+        [0, 8, 8, 0, 0],
+        [0, 0, 4, 4, 0],
+        [0, 0, 0, 0, 8]
+      ];
+
+      var after = [
+        [0, 0, 0, 0, 8],
+        [0, 4, 0, 4, 0],
+        [2, 0, 8, 4, 0],
+        [2, 4, 8, 0, 0],
+        [2, 2, 0, 0, 0]
+      ];
+
+      board.rotate_ccw();
+      expect(board.board).toEqual(after);
+    });
+  });
+
+  describe('#rotate_cw', function() {
+    it('rotates the board cw', function() {
+      board.board = [
+        [2, 2, 2, 0, 0],
+        [2, 4, 0, 4, 0],
+        [0, 8, 8, 0, 0],
+        [0, 0, 4, 4, 0],
+        [0, 0, 0, 0, 8]
+      ];
+
+      var after = [
+        [0, 0, 0, 2, 2],
+        [0, 0, 8, 4, 2],
+        [0, 4, 8, 0, 2],
+        [0, 4, 0, 4, 0],
+        [8, 0, 0, 0, 0]
+      ];
+
+      board.rotate_cw();
+      expect(board.board).toEqual(after);
+    });
+  });
 });

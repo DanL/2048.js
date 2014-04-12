@@ -106,6 +106,20 @@ var Board = (function() {
 
         return row;
       });
+    },
+
+    rotate_ccw: function() {
+      this.board = _.map(this.board, function(row) {
+        return row.reverse();
+      });
+
+      this.board = _.zip.apply(_, this.board);
+    },
+
+    rotate_cw: function() {
+      this.board = _.zip.apply(_, this.board).map(function(row) {
+        return row.reverse();
+      });
     }
   };
 
