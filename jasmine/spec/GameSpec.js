@@ -28,4 +28,20 @@ describe('Game', function() {
       expect(game.get_board().contains(4)).toEqual(true);
     });
   });
+
+  describe('#left', function() {
+    it('merges tiles left', function() {
+      spyOn(game.board, 'merge_left').and.callThrough();
+      game.left();
+      expect(game.board.merge_left).toHaveBeenCalled();
+    });
+  });
+
+  describe('#right', function() {
+    it('merges tiles right', function() {
+      spyOn(game.board, 'merge_right').and.callThrough();
+      game.right();
+      expect(game.board.merge_right).toHaveBeenCalled();
+    });
+  });
 });
