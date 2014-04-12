@@ -20,6 +20,10 @@ var Game = (function() {
     move: function(direction) {
       this[direction]();
 
+      // TODO: check if any moves have been made
+      // by comparing the current to the old board
+      // return true if no moves have been made
+
       if(this.board.has_empty_tile()) {
         this.board.set_random_empty_tile(2);
         return true;
@@ -54,6 +58,7 @@ var Game = (function() {
       this.board.fold_right();
       this.board.collapse_right();
       this.board.rotate_ccw();
+      this.board.flip_horizontally();
     }
   };
 
