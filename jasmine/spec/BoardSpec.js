@@ -91,6 +91,29 @@ describe('Board', function() {
     });
   });
 
+  describe('#collapse_right', function() {
+    it('pushes all tiles to the right', function() {
+      board.board = [
+        [0, 0, 0, 0, 2],
+        [2, 2, 0, 0, 0],
+        [2, 0, 2, 0, 0],
+        [2, 0, 0, 2, 0],
+        [2, 0, 0, 0, 2]
+      ];
+
+      var after = [
+        [0, 0, 0, 0, 2],
+        [0, 0, 0, 2, 2],
+        [0, 0, 0, 2, 2],
+        [0, 0, 0, 2, 2],
+        [0, 0, 0, 2, 2]
+      ];
+
+      board.collapse_right();
+      expect(board.board).toEqual(after);
+    });
+  });
+
   describe('#fold_left', function() {
     it('merges all tiles one space to the left', function() {
       board.board = [
@@ -109,23 +132,63 @@ describe('Board', function() {
         [0,  0, 0, 0, 8]
       ];
 
-      board.fold();
+      board.fold_left();
+      expect(board.board).toEqual(after);
+    });
+  });
+
+  describe('#fold_right', function() {
+    it('merges all tiles one space to the right', function() {
+      board.board = [
+        [2, 2, 2, 0, 0],
+        [2, 4, 0, 4, 0],
+        [0, 8, 8, 0, 0],
+        [0, 0, 4, 4, 0],
+        [0, 0, 0, 0, 8]
+      ];
+
+      var after = [
+        [2, 0,  4, 0, 0],
+        [2, 4,  0, 4, 0],
+        [0, 0, 16, 0, 0],
+        [0, 0,  0, 8, 0],
+        [0, 0,  0, 0, 8]
+      ];
+
+      board.fold_right();
       expect(board.board).toEqual(after);
     });
   });
 
   describe('#merge_left', function() {
     beforeEach(function() {
-      spyOn(board, 'collapse_left').andCallThrough();
-      spyOn(board, 'fold_left').andCallThrough();
+      spyOn(board, 'collapse_left').and.callThrough();
+      spyOn(board, 'fold_left').and.callThrough();
     });
 
     it('collapses, folds, and collapses again', function() {
+      board.merge_left();
       expect(board.collapse_left).toHaveBeenCalled();
-      expect(board.fold).toHaveBeenCalled();
+      expect(board.fold_left).toHaveBeenCalled();
 
       // Not sure how to assert that this gets called again.
       // expect(board.collapse_left).toHaveBeenCalled();
+    });
+  });
+
+  describe('#merge_right', function() {
+    beforeEach(function() {
+      spyOn(board, 'collapse_right').and.callThrough();
+      spyOn(board, 'fold_right').and.callThrough();
+    });
+
+    it('collapses, folds, and collapses again', function() {
+      board.merge_right();
+      expect(board.collapse_right).toHaveBeenCalled();
+      expect(board.fold_right).toHaveBeenCalled();
+
+      // Not sure how to assert that this gets called again.
+      // expect(board.collapse_right).toHaveBeenCalled();
     });
   });
 });
