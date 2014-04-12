@@ -37,10 +37,20 @@ describe('Game', function() {
     });
 
     describe('when the board has an empty tile', function() {
-      it('spawns a random tile', function() {
-        spyOn(game.board, 'set_random_empty_tile').and.callThrough();
-        game.move('left');
-        expect(game.board.set_random_empty_tile).toHaveBeenCalledWith(2);
+      describe('when moving the board results in a change', function() {
+        it('spawns a random tile', function() {
+          game.board.board = [
+            [0, 2, 0, 0, 0],
+            [0, 2, 0, 0, 0],
+            [0, 2, 0, 0, 0],
+            [0, 2, 0, 0, 0],
+            [0, 2, 0, 0, 0]
+          ];
+
+          spyOn(game.board, 'set_random_empty_tile').and.callThrough();
+          game.move('left');
+          expect(game.board.set_random_empty_tile).toHaveBeenCalledWith(2);
+        });
       });
 
       it('returns true', function() {

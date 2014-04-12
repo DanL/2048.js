@@ -18,14 +18,15 @@ var Game = (function() {
 
     // if this returns false, the game is over
     move: function(direction) {
+      var original_board = this.board.board;
+
       this[direction]();
 
-      // TODO: check if any moves have been made
-      // by comparing the current to the old board
-      // return true if no moves have been made
-
       if(this.board.has_empty_tile()) {
-        this.board.set_random_empty_tile(2);
+        if(_.difference(this.board.board, original_board).length > 0) {
+          this.board.set_random_empty_tile(2);
+        }
+
         return true;
       }
 
