@@ -235,4 +235,27 @@ describe('Board', function() {
       expect(board.board).toEqual(after);
     });
   });
+
+  describe('#flip_horizontally', function() {
+    it('flips the board horizontally', function() {
+      board.board = [
+        [2, 2, 2, 0, 0],
+        [2, 4, 0, 4, 0],
+        [0, 8, 8, 0, 0],
+        [0, 0, 4, 4, 0],
+        [0, 0, 0, 0, 8]
+      ];
+
+      var after = [
+        [0, 0, 0, 0, 8],
+        [0, 0, 4, 4, 0],
+        [0, 8, 8, 0, 0],
+        [2, 4, 0, 4, 0],
+        [2, 2, 2, 0, 0]
+      ];
+
+      board.flip_horizontally();
+      expect(board.board).toEqual(after);
+    });
+  });
 });

@@ -116,7 +116,7 @@ describe('Game', function() {
       expect(game.board.fold_right).toHaveBeenCalled();
       // Not sure how to assert that #collapse_right gets called again.
       // expect(game.board.collapse_right).toHaveBeenCalled();
-      expect(game.board.rotate_ccw).toHaveBeenCalled();
+      expect(game.board.rotate_cw).toHaveBeenCalled();
     });
   })
 });

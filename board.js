@@ -125,6 +125,10 @@ var Board = (function() {
       this.board = _.zip.apply(_, this.board).map(function(row) {
         return row.reverse();
       });
+    },
+
+    flip_horizontally: function() {
+      this.board = this.board.reverse();
     }
   };
 
