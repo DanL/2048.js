@@ -26,6 +26,22 @@ var Game = (function() {
       this.board.collapse_right();
       this.board.fold_right();
       this.board.collapse_right();
+    },
+
+    up: function() {
+      this.board.rotate_ccw();
+      this.board.collapse_left();
+      this.board.fold_left();
+      this.board.collapse_left();
+      this.board.rotate_cw();
+    },
+
+    down: function() {
+      this.board.rotate_cw();
+      this.board.collapse_right();
+      this.board.fold_right();
+      this.board.collapse_right();
+      this.board.rotate_ccw();
     }
   };
 
