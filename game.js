@@ -16,6 +16,12 @@ var Game = (function() {
       this.board.set_random_empty_tile(4);
     },
 
+    // decouples shifting the board from spawning a new tile
+    move: function(direction) {
+      this[direction]();
+      this.board.set_random_empty_tile(2);
+    },
+
     left: function() {
       this.board.collapse_left();
       this.board.fold_left();

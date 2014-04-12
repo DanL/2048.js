@@ -29,6 +29,20 @@ describe('Game', function() {
     });
   });
 
+  describe('#move', function() {
+    it('moves the board left', function() {
+      spyOn(game, 'left').and.callThrough();
+      game.move('left');
+      expect(game.left).toHaveBeenCalled();
+    });
+
+    it('spawns a random tile', function() {
+      spyOn(game.board, 'set_random_empty_tile').and.callThrough();
+      game.move('left');
+      expect(game.board.set_random_empty_tile).toHaveBeenCalledWith(2);
+    });
+  });
+
   describe('#left', function() {
     it('merges tiles left', function() {
       spyOn(game.board, 'collapse_left').and.callThrough();
