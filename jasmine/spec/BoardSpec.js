@@ -132,7 +132,7 @@ describe('Board', function() {
         [0,  0, 0, 0, 8]
       ];
 
-      board.fold();
+      board.fold_left();
       expect(board.board).toEqual(after);
     });
   });
