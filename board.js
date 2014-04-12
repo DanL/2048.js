@@ -50,6 +50,27 @@ var Board = (function() {
     set_random_empty_tile: function(number) {
       var coords = this.get_tile_coords(this.select_random_empty_tile());
       this.board[coords.y][coords.x] = number;
+    },
+
+    // removes all left space between tiles
+    collapse_left: function() {
+      var zerofilled = [0, 0, 0, 0, 0];
+      this.board = _.map(this.board, function(row) {
+        var compacted_row = _.compact(row);
+        var padding = zerofilled.slice(0, 5 - compacted_row.length);
+        return compacted_row.concat(padding);
+      });
+    },
+
+    // merges tiles into their immediate identical left neighbor
+    fold_left: function() {},
+
+    // collapses the board, performs a merge, then collapses again
+    // to account for space left by the merge
+    merge_left: function() {
+      board.collapse_left();
+      board.fold_left();
+      board.collapse_left();
     }
   };
 

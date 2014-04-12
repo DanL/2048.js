@@ -67,4 +67,65 @@ describe('Board', function() {
       expect(_.chain(board).flatten().contains(2).value()).toEqual(true);
     });
   });
+
+  describe('#collapse_left', function() {
+    it('pushes all tiles to the left', function() {
+      board.board = [
+        [0, 0, 0, 0, 2],
+        [2, 2, 0, 0, 0],
+        [2, 0, 2, 0, 0],
+        [2, 0, 0, 2, 0],
+        [2, 0, 0, 0, 2]
+      ];
+
+      var after = [
+        [2, 0, 0, 0, 0],
+        [2, 2, 0, 0, 0],
+        [2, 2, 0, 0, 0],
+        [2, 2, 0, 0, 0],
+        [2, 2, 0, 0, 0]
+      ];
+
+      board.collapse_left();
+      expect(board.board).toEqual(after);
+    });
+  });
+
+  describe('#fold_left', function() {
+    it('merges all tiles one space to the left', function() {
+      board.board = [
+        [2, 2, 0, 0, 0],
+        [2, 4, 0, 0, 0],
+        [0, 8, 8, 0, 0],
+        [0, 0, 4, 4, 0],
+        [0, 0, 0, 0, 8]
+      ];
+
+      var after = [
+        [4,  0, 0, 0, 0],
+        [2,  4, 0, 0, 0],
+        [0, 16, 0, 0, 0],
+        [0,  0, 8, 0, 0],
+        [0,  0, 0, 0, 8]
+      ];
+
+      board.fold_left();
+      expect(board.board).toEqual(after);
+    });
+  });
+
+  describe('#merge_left', function() {
+    beforeEach(function() {
+      spyOn(board, 'collapse_left').andCallThrough();
+      spyOn(board, 'fold_left').andCallThrough();
+    });
+
+    it('collapses, folds, and collapses again', function() {
+      expect(board.collapse_left).toHaveBeenCalled();
+      expect(board.fold_left).toHaveBeenCalled();
+
+      // Not sure how to assert that this gets called again.
+      // expect(board.collapse_left).toHaveBeenCalled();
+    });
+  });
 });
