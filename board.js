@@ -130,10 +130,10 @@ var Board = (function() {
           else if(x < this.board_size && this.board[y][x + 1] === current) {
             return true;
           }
-
-          return false;
         }
       }
+
+      return false;
     }
   };
 

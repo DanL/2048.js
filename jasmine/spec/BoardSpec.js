@@ -186,31 +186,33 @@ describe('Board', function() {
     });
   });
 
-  describe('when there is a possible move', function() {
-    it('returns true', function() {
-      board.board = [
-        [2, 2, 0, 0, 0],
-        [2, 2, 0, 0, 0],
-        [2, 2, 0, 0, 0],
-        [2, 2, 0, 0, 0],
-        [2, 2, 0, 0, 0]
-      ];
+  describe('#has_possible_move', function() {
+    describe('when there is a possible move', function() {
+      it('returns true', function() {
+        board.board = [
+          [2, 2, 0, 0, 0],
+          [2, 2, 0, 0, 0],
+          [2, 2, 0, 0, 0],
+          [2, 2, 0, 0, 0],
+          [2, 2, 0, 0, 0]
+        ];
 
-      expect(board.has_possible_move()).toEqual(true);
+        expect(board.has_possible_move()).toEqual(true);
+      });
     });
-  });
 
-  describe('when there is not a possible move', function() {
-    it('returns false', function() {
-      board.board = [
-        [2, 4, 2, 4, 2],
-        [4, 2, 4, 2, 4],
-        [2, 4, 2, 4, 2],
-        [4, 2, 4, 2, 4],
-        [2, 4, 2, 4, 2]
-      ];
+    describe('when there is not a possible move', function() {
+      it('returns false', function() {
+        board.board = [
+          [2, 4, 2, 4, 2],
+          [4, 2, 4, 2, 4],
+          [2, 4, 2, 4, 2],
+          [4, 2, 4, 2, 4],
+          [2, 4, 2, 4, 2]
+        ];
 
-      expect(board.has_possible_move()).toEqual(false);
+        expect(board.has_possible_move()).toEqual(false);
+      });
     });
   });
 });
