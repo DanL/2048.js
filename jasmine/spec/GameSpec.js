@@ -94,7 +94,14 @@ describe('Game', function() {
         [0, 0, 0, 0, 0]
       ];
 
-      expect(game.calculate_points(original_board, game.board.board, 2)).toEqual(8);
+      expect(game.calculate_points(original_board, game.board.board)).toEqual(8);
     });
-  })
+  });
+
+  describe('#points', function() {
+    it('returns the current points', function() {
+      game.current_points = 5;
+      expect(game.points()).toEqual(5);
+    });
+  });
 });

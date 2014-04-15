@@ -1,6 +1,7 @@
 var Game = (function() {
   var constructor = function(board_size) {
     this.board = new Board(board_size);
+    this.current_points = 0;
   };
 
   constructor.prototype = {
@@ -29,6 +30,7 @@ var Game = (function() {
       if(this.board.has_empty_tile()) {
         // TODO: test this when moving up/down
         if(this.board.board.join() != original_board.join()) {
+          this.current_points += this.calculate_points(original_board, this.board.board);
           this.board.set_random_empty_tile();
         }
 
@@ -38,7 +40,7 @@ var Game = (function() {
       return false;
     },
 
-    calculate_points: function(original_board, current_board, new_tile) {
+    calculate_points: function(original_board, current_board) {
       // returns non-unique values that are only in the new array
       function diff(old_array, new_array) {
         _.each(old_array, function(value, old_index) {
@@ -55,14 +57,13 @@ var Game = (function() {
       var new_array = diff(_.flatten(original_board),
                            _.flatten(current_board));
 
-      // remove the newly added tile
-      if(new_tile > 0) {
-        delete _.indexOf(new_array, new_tile);
-      }
-
       return _.reduce(new_array, function(sum, num) {
         return sum + num;
       }, 0);
+    },
+
+    points: function() {
+      return this.current_points;
     },
 
     left: function() {

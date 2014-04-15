@@ -21,6 +21,7 @@
 
     function update_page() {
       $('#board').html(generate_html(game.get_board().board));
+      $('#points').html(game.points());
     }
 
     // this must be called within document#ready
@@ -103,6 +104,9 @@
       <input type="number" name="board_size" min="2" max="12" value="5" />
     </label>
     <input type="button" name="new" value="New Game" />
+  </div>
+  <div>
+    Points: <span id="points">0</span>
   </div>
   <div id="board"></div>
 </body>
