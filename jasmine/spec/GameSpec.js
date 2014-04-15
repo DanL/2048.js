@@ -75,4 +75,26 @@ describe('Game', function() {
       });
     });
   });
+
+  describe('#calculate_points', function() {
+    it('returns the sum of all changes to the new board, excluding the randomly generated number', function() {
+      game.board.board = [
+        [8, 2, 0, 0, 0],
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0]
+      ];
+
+      var original_board = [
+        [4, 4, 2, 0, 0],
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0]
+      ];
+
+      expect(game.calculate_points(original_board, game.board.board, 2)).toEqual(8);
+    });
+  })
 });

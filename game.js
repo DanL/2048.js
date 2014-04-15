@@ -38,6 +38,33 @@ var Game = (function() {
       return false;
     },
 
+    calculate_points: function(original_board, current_board, new_tile) {
+      // returns non-unique values that are only in the new array
+      function diff(old_array, new_array) {
+        _.each(old_array, function(value, old_index) {
+          var new_index = _.indexOf(new_array, value);
+          if(new_index !== -1) {
+            delete old_array[old_index];
+            delete new_array[new_index];
+          }
+        });
+
+        return new_array;
+      }
+
+      var new_array = diff(_.flatten(original_board),
+                           _.flatten(current_board));
+
+      // remove the newly added tile
+      if(new_tile > 0) {
+        delete _.indexOf(new_array, new_tile);
+      }
+
+      return _.reduce(new_array, function(sum, num) {
+        return sum + num;
+      }, 0);
+    },
+
     left: function() {
       this.board.collapse();
       this.board.fold();
