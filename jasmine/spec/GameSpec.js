@@ -32,7 +32,7 @@ describe('Game', function() {
   });
 
   describe('#move', function() {
-    it('moves the board left', function() {
+    it('moves the board in a direction', function() {
       spyOn(game, 'left').and.callThrough();
       game.move('left');
       expect(game.left).toHaveBeenCalled();
