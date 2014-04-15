@@ -28,6 +28,8 @@ var Game = (function() {
       this[direction]();
 
       if(this.board.has_empty_tile()) {
+        // determines if the board has changed at all for the current turn
+        // if it hasn't, a new random tile is not added
         if(this.board.board.join() != original_board.join()) {
           this.current_points += this.calculate_points(original_board, this.board.board);
           this.board.set_random_empty_tile();
@@ -39,6 +41,7 @@ var Game = (function() {
       return false;
     },
 
+    // calculates the points gained in a given turn
     calculate_points: function(original_board, current_board) {
       // returns non-unique values that are only in the new array
       function diff(old_array, new_array) {
@@ -61,6 +64,7 @@ var Game = (function() {
       }, 0);
     },
 
+    // returns the current points
     points: function() {
       return this.current_points;
     },

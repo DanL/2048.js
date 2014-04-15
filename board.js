@@ -14,6 +14,7 @@ var Board = (function() {
   };
 
   constructor.prototype = {
+    // return the Board object
     get_board: function() {
       return this.board;
     },
@@ -49,7 +50,7 @@ var Board = (function() {
       return { x: x, y: y };
     },
 
-    // predicate to determine whether there are any empty tiles
+    // predicate to determine if there are any empty tiles
     has_empty_tile: function() {
       return this.contains(0);
     },
@@ -93,6 +94,7 @@ var Board = (function() {
       });
     },
 
+    // rotate the board counterclockwise
     rotate_ccw: function() {
       this.board = _.map(this.board, function(row) {
         return row.reverse();
@@ -101,12 +103,14 @@ var Board = (function() {
       this.board = _.zip.apply(_, this.board);
     },
 
+    // rotate the board clockwise
     rotate_cw: function() {
       this.board = _.zip.apply(_, this.board).map(function(row) {
         return row.reverse();
       });
     },
 
+    // predicate to determine if another move is possible
     has_possible_move: function() {
       // always has a possible move if a tile is empty
       if(this.has_empty_tile()) return true;
