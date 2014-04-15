@@ -87,6 +87,11 @@ describe('Board', function() {
       board.set_random_empty_tile();
       expect(board.contains(2) || board.contains(4)).toEqual(true);
     });
+
+    it('returns the random integer', function() {
+      var tile = board.set_random_empty_tile();
+      expect(tile === 2 || tile === 4).toEqual(true);
+    });
   });
 
   describe('#collapse', function() {
