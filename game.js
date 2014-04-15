@@ -28,7 +28,6 @@ var Game = (function() {
       this[direction]();
 
       if(this.board.has_empty_tile()) {
-        // TODO: test this when moving up/down
         if(this.board.board.join() != original_board.join()) {
           this.current_points += this.calculate_points(original_board, this.board.board);
           this.board.set_random_empty_tile();

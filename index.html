@@ -10,7 +10,7 @@
   <script type="text/javascript" src="jquery-2.1.0.min.js"></script>
 
   <script type="text/javascript">
-    var game, board_size = 5;
+    var game, board_size = 5, lost = false;
 
     function generate_html(board) {
       return _.flatten(board).map(function(number) {
@@ -36,6 +36,8 @@
         }
       })();
 
+      lost = false;
+
       game = new Game(board_size);
       game.start();
 
@@ -52,6 +54,10 @@
         // prevent this from running on invalid keys
         if(e.which < 37 || e.which > 40) return;
 
+        if(lost && confirm('Start a new game?')) {
+          new_game();
+        }
+
         switch(e.which) {
           case 37:
             game.move('left');
@@ -67,13 +73,14 @@
             break;
         }
 
-        // TODO: fix this logic
+        // Update regardless of whether the board has changed.
+        // This needs to happen before the game is lost,
+        // otherwise there will be an empty tile.
+        update_page();
+
         if(!game.has_possible_move()) {
+          lost = true;
           alert('Sorry, you lost!');
-        }
-        else {
-          // update regardless of whether the board has changed
-          update_page();
         }
       });
 
