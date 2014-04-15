@@ -10,6 +10,8 @@
   <script type="text/javascript" src="jquery-2.1.0.min.js"></script>
 
   <script type="text/javascript">
+    var game, board_size = 5;
+
     function generate_html(board) {
       return _.flatten(board).map(function(number) {
         if(number === 0) number = '&nbsp;';
@@ -18,15 +20,33 @@
     }
 
     function update_page() {
-      $('#board').html(generate_html(game.get_board()));
+      $('#board').html(generate_html(game.get_board().board));
     }
 
-    var game = new Game();
-    game.start();
+    // this must be called within document#ready
+    function new_game() {
+      board_size = (function() {
+        var size = parseInt($('[name="board_size"]').val());
+        if(size > 1) {
+          return size;
+        }
+        else {
+          return 5;
+        }
+      })();
+
+      game = new Game(board_size);
+      game.start();
+
+      $('#board').css({
+        width: (50 * board_size) + 'px',
+        height: (50 * board_size) + 'px'
+      });
+
+      update_page();
+    }
 
     $(document).ready(function() {
-      update_page();
-
       $(document).on('keyup', function(e) {
         // prevent this from running on invalid keys
         if(e.which < 37 || e.which > 40) return;
@@ -55,13 +75,19 @@
           update_page();
         }
       });
+
+      new_game();
+
+      $('[name="new"]').click(function() {
+        new_game();
+      });
     });
   </script>
 
   <style type="text/css">
     * { color: #000; font-family: monospace; font-size: 12pt; }
     body { background-color: #fff; cursor: default;}
-    #board { width: 250px; height: 250px; margin: 50px; }
+    #board { margin: 50px; }
       #board ::selection { background-color: transparent; }
       #board div {
         background-color: #eee;
@@ -71,6 +97,13 @@
   </style>
 </head>
 <body>
+  <div>
+    <label>
+      Board Size:
+      <input type="number" name="board_size" min="2" max="12" value="5" />
+    </label>
+    <input type="button" name="new" value="New Game" />
+  </div>
   <div id="board"></div>
 </body>
 </html>

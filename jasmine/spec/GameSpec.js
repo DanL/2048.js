@@ -2,7 +2,7 @@ describe('Game', function() {
   var game;
 
   beforeEach(function() {
-    game = new Game();
+    game = new Game(5);
   });
 
   it('has a board', function() {

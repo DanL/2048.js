@@ -2,25 +2,16 @@ describe('Board', function() {
   var board;
 
   beforeEach(function() {
-    board = new Board();
+    board = new Board(5);
   });
 
   describe('#get_board', function() {
-    function count_tiles(board) {
-      var tiles = 0;
-      for(var y = 0; y < board.length; y++) {
-        tiles += board[y].length;
-      }
-
-      return tiles;
-    }
-
     it('should have 5 rows', function() {
       expect(board.get_board().length).toEqual(5);
     });
 
     it('should have 25 tiles', function() {
-      expect(count_tiles(board.get_board())).toEqual(25);
+      expect(_(board.get_board()).flatten().length).toEqual(25);
     });
   });
 

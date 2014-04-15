@@ -1,13 +1,16 @@
 var Board = (function() {
-  var constructor = function() {
-    // initializes an empty 5x5 board
-    this.board = [
-      [0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0]
-    ];
+  var constructor = function(board_size) {
+    this.board_size = board_size;
+
+    // needs to be a var since `this` has a different context in #times
+    var row = _(this.board_size).times(function() {
+      return 0;
+    });
+    this.row = row;
+
+    this.board = _(this.board_size).times(function() {
+      return _.clone(row);
+    });
   };
 
   constructor.prototype = {
@@ -21,7 +24,7 @@ var Board = (function() {
       return _.chain(this.board).flatten().contains(value).value();
     },
 
-    // returns the 0-24 indexes of all empty nodes
+    // returns the 0-((board_size ^ 2) - 1) indexes of all empty nodes
     find_empty_nodes: function() {
       return _.flatten(this.board).reduce(function(memo, value, index) {
         if(value === 0) {
@@ -32,17 +35,17 @@ var Board = (function() {
       }, []);
     },
 
-    // returns the 0-24 index of a random empty tile
+    // returns the 0-((board_size ^ 2) - 1) index of a random empty tile
     select_random_empty_tile: function() {
       var possible_nodes = this.find_empty_nodes();
       var selected_node = Math.floor(Math.random() * possible_nodes.length);
       return possible_nodes[selected_node];
     },
 
-    // converts a 0-24 index to xy coordinates
+    // converts a 0-((board_size ^ 2) - 1) index to xy coordinates
     get_tile_coords: function(index) {
-      var x = index % 5;
-      var y = ((index - x) / 5);
+      var x = index % this.board_size;
+      var y = ((index - x) / this.board_size);
       return { x: x, y: y };
     },
 
@@ -61,10 +64,11 @@ var Board = (function() {
 
     // removes all left space between tiles
     collapse: function() {
-      var zerofilled = [0, 0, 0, 0, 0];
+      var zerofilled = this.row;
+      var board_size = this.board_size;
       this.board = _.map(this.board, function(row) {
         var compacted_row = _.compact(row);
-        var padding = zerofilled.slice(0, 5 - compacted_row.length);
+        var padding = zerofilled.slice(0, board_size - compacted_row.length);
         return compacted_row.concat(padding);
       });
     },
@@ -105,10 +109,8 @@ var Board = (function() {
       // always has a possible move if a tile is empty
       if(this.has_empty_tile()) return true;
 
-      var y_length = this.board.length;
-      for(var y = 0; y < y_length; y++) {
-        var x_length = this.board[y].length;
-        for(var x = 0; x < x_length; x++) {
+      for(var y = 0; y < this.board_size; y++) {
+        for(var x = 0; x < this.board_size; x++) {
           var current = this.board[y][x];
           // above
           if(y > 0 && this.board[y - 1][x] === current) {
@@ -119,11 +121,11 @@ var Board = (function() {
             return true;
           }
           // under
-          else if(y < y_length && this.board[y + 1][x] === current) {
+          else if(y < this.board_size && this.board[y + 1][x] === current) {
             return true;
           }
           // right
-          else if(x < x_length && this.board[y][x + 1] === current) {
+          else if(x < this.board_size && this.board[y][x + 1] === current) {
             return true;
           }
 

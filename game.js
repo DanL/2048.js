@@ -1,6 +1,6 @@
 var Game = (function() {
-  var constructor = function() {
-    this.board = new Board();
+  var constructor = function(board_size) {
+    this.board = new Board(board_size);
   };
 
   constructor.prototype = {
