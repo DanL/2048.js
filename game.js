@@ -5,6 +5,7 @@ var Game = (function() {
   };
 
   constructor.prototype = {
+    // returns the Board object
     get_board: function() {
       return this.board;
     },

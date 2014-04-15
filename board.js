@@ -14,7 +14,7 @@ var Board = (function() {
   };
 
   constructor.prototype = {
-    // return the Board object
+    // returns the Board object
     get_board: function() {
       return this.board;
     },
