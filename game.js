@@ -11,9 +11,8 @@ var Game = (function() {
     // initial setup before the first turn
     // this is run manually so that we can test against an empty board
     start: function() {
-      this.board.set_random_empty_tile(2);
-      // TODO: This should be randomized to either 2 or 4
-      this.board.set_random_empty_tile(4);
+      this.board.set_random_empty_tile();
+      this.board.set_random_empty_tile();
     },
 
     // checks to see whether you've lost

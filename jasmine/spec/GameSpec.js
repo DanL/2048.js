@@ -16,16 +16,10 @@ describe('Game', function() {
   });
 
   describe('#start', function() {
-    beforeEach(function() {
+    it('sets two random tiles', function() {
+      spyOn(game.board, 'set_random_empty_tile');
       game.start();
-    });
-
-    it('sets a random tile to 2', function() {
-      expect(game.get_board().contains(2)).toEqual(true);
-    });
-
-    it('sets a random tile to 4', function() {
-      expect(game.get_board().contains(4)).toEqual(true);
+      expect(game.board.set_random_empty_tile.calls.count()).toEqual(2);
     });
   });
 

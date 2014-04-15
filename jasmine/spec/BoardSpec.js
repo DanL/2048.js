@@ -27,14 +27,14 @@ describe('Board', function() {
   describe('#contains', function() {
     describe('when the board contains a specified integer', function() {
       it('returns true', function() {
-        board.set_random_empty_tile(2);
-        expect(board.contains(2)).toEqual(true);
+        board.set_random_empty_tile();
+        expect(board.contains(2) || board.contains(4)).toEqual(true);
       });
     });
 
     describe('when the board does not contain a specified integer', function() {
       it('returns false', function() {
-        expect(board.contains(2)).toEqual(false);
+        expect(board.contains(3)).toEqual(false);
       });
     });
   });
@@ -93,8 +93,8 @@ describe('Board', function() {
 
   describe('#set_random_empty_tile', function() {
     it('sets a random tile to the specified integer', function() {
-      board.set_random_empty_tile(2);
-      expect(_.chain(board).flatten().contains(2).value()).toEqual(true);
+      board.set_random_empty_tile();
+      expect(board.contains(2) || board.contains(4)).toEqual(true);
     });
   });
 

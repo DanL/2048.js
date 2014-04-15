@@ -51,10 +51,12 @@ var Board = (function() {
       return this.contains(0);
     },
 
-    // sets a random empty file to the given integer
-    set_random_empty_tile: function(number) {
+    // sets a random empty file to 2 or 4
+    set_random_empty_tile: function() {
+      var numbers = [2, 4];
+      var random_number = numbers[Math.floor(Math.random() * 2)];
       var coords = this.get_tile_coords(this.select_random_empty_tile());
-      this.board[coords.y][coords.x] = number;
+      this.board[coords.y][coords.x] = random_number;
     },
 
     // removes all left space between tiles
