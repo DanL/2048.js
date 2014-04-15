@@ -48,6 +48,10 @@
       game = new Game(board_size);
       game.start();
 
+      $('#game').css({
+        width: (50 * (board_size >= 5 ? board_size : 5)) + 'px'
+      });
+
       $('#board').css({
         width: (50 * board_size) + 'px',
         height: (50 * board_size) + 'px'
@@ -101,8 +105,9 @@
 
   <style type="text/css">
     * { color: #000; font-family: monospace; font-size: 10pt; }
-    body { background-color: #fff; cursor: default;}
-    #board { margin: 50px; padding: 5px; background-color: #ccc; border-radius: 5px; }
+    body { background-color: #fff; cursor: default; }
+    #game { margin: 50px auto; }
+    #board { padding: 5px; background-color: #ccc; border-radius: 5px; }
       #board ::selection { background-color: transparent; }
       #board div {
         background-color: #ddd; border-radius: 2px;
@@ -120,19 +125,31 @@
     .number-512 { background-color: #E88158 !important; }
     .number-1028 { background-color: #D65522 !important; }
     .number-2056 { background-color: #FF4800 !important; }
+    #controls { margin-bottom: 15px; }
+      #controls:after { content: '.'; font-size: 0; clear: both; }
+      #controls-board { width: 60%; float: left; }
+        #controls-board input[name="board_size"] {
+          border: 1px solid #aaa; border-radius: 5px 0 0 5px;
+          padding: 3px 3px 2px 5px; vertical-align: bottom;
+        }
+        #controls-board input[name="new"] {
+          background-color: #fafafa; border: 1px solid #aaa; border-radius: 0 5px 5px 0;
+          display: inline-block; margin-left: -11px;
+        }
+      #controls-points { width: 30%; float: right; text-align: right; padding-top: 1px; }
+        #points { font-size: 15pt; font-weight: bold; color: #777; }
   </style>
 </head>
 <body>
-  <div>
-    <label>
-      Board Size:
-      <input type="number" name="board_size" min="2" max="12" value="5" />
-    </label>
-    <input type="button" name="new" value="New Game" />
+  <div id="game">
+    <div id="controls">
+      <div id="controls-board">
+        <input type="number" name="board_size" min="2" max="12" value="5" />
+        <input type="button" name="new" value="New Game" />
+      </div>
+      <div id="controls-points"><span id="points">0</span></div>
+    </div>
+    <div id="board"></div>
   </div>
-  <div>
-    Points: <span id="points">0</span>
-  </div>
-  <div id="board"></div>
 </body>
 </html>
