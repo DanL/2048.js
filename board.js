@@ -123,11 +123,11 @@ var Board = (function() {
             return true;
           }
           // under
-          else if(y < this.board_size && this.board[y + 1][x] === current) {
+          else if(y < (this.board_size - 1) && this.board[y + 1][x] === current) {
             return true;
           }
           // right
-          else if(x < this.board_size && this.board[y][x + 1] === current) {
+          else if(x < (this.board_size - 1) && this.board[y][x + 1] === current) {
             return true;
           }
         }
