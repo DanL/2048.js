@@ -51,7 +51,7 @@ describe('Game', function() {
 
           spyOn(game.board, 'set_random_empty_tile').and.callThrough();
           game.move('left');
-          expect(game.board.set_random_empty_tile).toHaveBeenCalledWith(2);
+          expect(game.board.set_random_empty_tile).toHaveBeenCalled();
         });
       });
 

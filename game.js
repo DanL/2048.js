@@ -29,7 +29,7 @@ var Game = (function() {
       if(this.board.has_empty_tile()) {
         // TODO: test this when moving up/down
         if(this.board.board.join() != original_board.join()) {
-          this.board.set_random_empty_tile(2);
+          this.board.set_random_empty_tile();
         }
 
         return true;
