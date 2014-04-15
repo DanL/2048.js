@@ -14,8 +14,15 @@
 
     function generate_html(board) {
       return _.flatten(board).map(function(number) {
-        if(number === 0) number = '&nbsp;';
-        return '<div>' + number + '</div>';
+        if(number === 0) {
+          number = '&nbsp;';
+          class_name = '';
+        }
+        else {
+          class_name = 'number-' + number;
+        }
+
+        return '<div class="' + class_name + '">' + number + '</div>';
       });
     }
 
@@ -95,13 +102,24 @@
   <style type="text/css">
     * { color: #000; font-family: monospace; font-size: 10pt; }
     body { background-color: #fff; cursor: default;}
-    #board { margin: 50px; }
+    #board { margin: 50px; padding: 5px; background-color: #ccc; border-radius: 5px; }
       #board ::selection { background-color: transparent; }
       #board div {
-        background-color: #eee;
+        background-color: #ddd; border-radius: 2px;
         width: 40px; height: 40px; margin: 5px; display: inline-block;
-        text-align: center; padding-top: 11px; box-sizing: border-box;
+        text-align: center; padding-top: 13px; box-sizing: border-box;
       }
+    .number-2 { background-color: #f5f5f5 !important; }
+    .number-4 { background-color: #EDD5A1 !important; }
+    .number-8 { background-color: #E8B443 !important; }
+    .number-16 { background-color: #E88243 !important; }
+    .number-32 { background-color: #CC611F !important; }
+    .number-64 { background-color: #BF4E08 !important; }
+    .number-128 { background-color: #FAEA11 !important; }
+    .number-256 { background-color: #D4C82A !important; }
+    .number-512 { background-color: #E88158 !important; }
+    .number-1028 { background-color: #D65522 !important; }
+    .number-2056 { background-color: #FF4800 !important; }
   </style>
 </head>
 <body>
