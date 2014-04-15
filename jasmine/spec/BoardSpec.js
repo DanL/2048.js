@@ -98,7 +98,7 @@ describe('Board', function() {
     });
   });
 
-  describe('#collapse_left', function() {
+  describe('#collapse', function() {
     it('pushes all tiles to the left', function() {
       board.board = [
         [0, 0, 0, 0, 2],
@@ -116,35 +116,12 @@ describe('Board', function() {
         [2, 2, 0, 0, 0]
       ];
 
-      board.collapse_left();
+      board.collapse();
       expect(board.board).toEqual(after);
     });
   });
 
-  describe('#collapse_right', function() {
-    it('pushes all tiles to the right', function() {
-      board.board = [
-        [0, 0, 0, 0, 2],
-        [2, 2, 0, 0, 0],
-        [2, 0, 2, 0, 0],
-        [2, 0, 0, 2, 0],
-        [2, 0, 0, 0, 2]
-      ];
-
-      var after = [
-        [0, 0, 0, 0, 2],
-        [0, 0, 0, 2, 2],
-        [0, 0, 0, 2, 2],
-        [0, 0, 0, 2, 2],
-        [0, 0, 0, 2, 2]
-      ];
-
-      board.collapse_right();
-      expect(board.board).toEqual(after);
-    });
-  });
-
-  describe('#fold_left', function() {
+  describe('#fold', function() {
     it('merges all tiles one space to the left', function() {
       board.board = [
         [2, 2, 2, 0, 0],
@@ -162,30 +139,7 @@ describe('Board', function() {
         [0,  0, 0, 0, 8]
       ];
 
-      board.fold_left();
-      expect(board.board).toEqual(after);
-    });
-  });
-
-  describe('#fold_right', function() {
-    it('merges all tiles one space to the right', function() {
-      board.board = [
-        [2, 2, 2, 0, 0],
-        [2, 4, 0, 4, 0],
-        [0, 8, 8, 0, 0],
-        [0, 0, 4, 4, 0],
-        [0, 0, 0, 0, 8]
-      ];
-
-      var after = [
-        [2, 0,  4, 0, 0],
-        [2, 4,  0, 4, 0],
-        [0, 0, 16, 0, 0],
-        [0, 0,  0, 8, 0],
-        [0, 0,  0, 0, 8]
-      ];
-
-      board.fold_right();
+      board.fold();
       expect(board.board).toEqual(after);
     });
   });

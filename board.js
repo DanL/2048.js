@@ -60,7 +60,7 @@ var Board = (function() {
     },
 
     // removes all left space between tiles
-    collapse_left: function() {
+    collapse: function() {
       var zerofilled = [0, 0, 0, 0, 0];
       this.board = _.map(this.board, function(row) {
         var compacted_row = _.compact(row);
@@ -69,18 +69,8 @@ var Board = (function() {
       });
     },
 
-    // removes all right space between tiles
-    collapse_right: function() {
-      var zerofilled = [0, 0, 0, 0, 0];
-      this.board = _.map(this.board, function(row) {
-        var compacted_row = _.compact(row);
-        var padding = zerofilled.slice(0, 5 - compacted_row.length);
-        return padding.concat(compacted_row);
-      });
-    },
-
     // merges tiles into their immediate identical left neighbor
-    fold_left: function() {
+    fold: function() {
       this.board = _.map(this.board, function(row) {
         // iterates over each tile
         for(var x = 0; x < row.length; x++) {
@@ -90,24 +80,6 @@ var Board = (function() {
             // unsets the next tile, so that when the
             // pointer advances, it won't compute again
             row[x + 1] = 0;
-          }
-        }
-
-        return row;
-      });
-    },
-
-    // merges tiles into their immediate identical right neighbor
-    fold_right: function() {
-      this.board = _.map(this.board, function(row) {
-        // iterates over each tile
-        for(var x = row.length - 1; x >= 0; x--) {
-          // compares against the tile immediately to the left
-          if(row[x] === row[x - 1]) {
-            row[x] *= 2;
-            // unsets the next tile, so that when the
-            // pointer advances, it won't compute again
-            row[x - 1] = 0;
           }
         }
 

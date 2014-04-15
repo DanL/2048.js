@@ -39,31 +39,36 @@ var Game = (function() {
     },
 
     left: function() {
-      this.board.collapse_left();
-      this.board.fold_left();
-      this.board.collapse_left();
+      this.board.collapse();
+      this.board.fold();
+      this.board.collapse();
     },
 
+    // rotates the board 180* to simulate a foldr
     right: function() {
-      this.board.collapse_right();
-      this.board.fold_right();
-      this.board.collapse_right();
+      this.board.rotate_ccw();
+      this.board.rotate_ccw();
+      this.board.collapse();
+      this.board.fold();
+      this.board.collapse();
+      this.board.rotate_cw();
+      this.board.rotate_cw();
     },
 
     up: function() {
       this.board.rotate_ccw();
-      this.board.collapse_left();
-      this.board.fold_left();
-      this.board.collapse_left();
+      this.board.collapse();
+      this.board.fold();
+      this.board.collapse();
       this.board.rotate_cw();
     },
 
     down: function() {
-      this.board.rotate_ccw();
-      this.board.collapse_right();
-      this.board.fold_right();
-      this.board.collapse_right();
       this.board.rotate_cw();
+      this.board.collapse();
+      this.board.fold();
+      this.board.collapse();
+      this.board.rotate_ccw();
     }
   };
 
