@@ -17,9 +17,14 @@ var Game = (function() {
       this.board.set_random_empty_tile();
     },
 
-    // checks to see whether you've lost
+    // checks to see if you've lost
     has_possible_move: function() {
       return this.board.has_possible_move();
+    },
+
+    // checks to see if you've won
+    has_2048_tile: function() {
+      return this.board.contains(2048);
     },
 
     // if this returns false, the game is over
@@ -31,6 +36,8 @@ var Game = (function() {
       if(this.board.has_empty_tile()) {
         // determines if the board has changed at all for the current turn
         // if it hasn't, a new random tile is not added
+
+        // TODO: this is not working correctly
         if(this.board.board.join() != original_board.join()) {
           this.current_points += this.calculate_points(original_board, this.board.board);
           this.board.set_random_empty_tile();

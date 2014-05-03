@@ -93,6 +93,10 @@
           lost = true;
           alert('Sorry, you lost!');
         }
+        // Player is allowed to continue even if they win.
+        else if(game.has_2048_tile()) {
+          alert('You win!');
+        }
       });
 
       new_game();

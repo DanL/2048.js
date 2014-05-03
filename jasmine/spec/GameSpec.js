@@ -31,6 +31,14 @@ describe('Game', function() {
     });
   });
 
+  describe('#has_2048_tile', function() {
+    it('checks whether a 2048 tile exists', function() {
+      spyOn(game.board, 'contains');
+      game.has_2048_tile();
+      expect(game.board.contains).toHaveBeenCalledWith(2048);
+    });
+  });
+
   describe('#move', function() {
     it('moves the board in a direction', function() {
       spyOn(game, 'left').and.callThrough();
