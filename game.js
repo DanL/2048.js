@@ -29,15 +29,14 @@ var Game = (function() {
 
     // if this returns false, the game is over
     move: function(direction) {
-      var original_board = this.board.board;
+      var original_board = this.board.board.join();
 
       this[direction]();
 
       if(this.board.has_empty_tile()) {
         // determines if the board has changed at all for the current turn
         // if it hasn't, a new random tile is not added
-
-        if(this.board.board.join() != original_board.join()) {
+        if(this.board.board.join() != original_board) {
           this.current_points += this.calculate_points(original_board, this.board.board);
           this.board.set_random_empty_tile();
         }
