@@ -37,7 +37,6 @@ var Game = (function() {
         // determines if the board has changed at all for the current turn
         // if it hasn't, a new random tile is not added
 
-        // TODO: this is not working correctly
         if(this.board.board.join() != original_board.join()) {
           this.current_points += this.calculate_points(original_board, this.board.board);
           this.board.set_random_empty_tile();

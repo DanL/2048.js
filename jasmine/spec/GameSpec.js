@@ -63,6 +63,22 @@ describe('Game', function() {
         });
       });
 
+      describe('when moving the board does not result in a change', function() {
+        it('does not spawn a random tile', function() {
+          game.board.board = [
+            [2, 0, 0, 0, 0],
+            [2, 0, 0, 0, 0],
+            [2, 0, 0, 0, 0],
+            [2, 0, 0, 0, 0],
+            [2, 0, 0, 0, 0]
+          ];
+
+          spyOn(game.board, 'set_random_empty_tile').and.callThrough();
+          game.move('left');
+          expect(game.board.set_random_empty_tile).not.toHaveBeenCalled();
+        });
+      });
+
       it('returns true', function() {
         expect(game.move('left')).toEqual(true);
       });
