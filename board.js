@@ -117,21 +117,10 @@ var Board = (function() {
 
       for(var y = 0; y < this.board_size; y++) {
         for(var x = 0; x < this.board_size; x++) {
-          var current = this.board[y][x];
-          // above
-          if(y > 0 && this.board[y - 1][x] === current) {
-            return true;
-          }
-          // left
-          else if(x > 0 && this.board[y][x - 1] === current) {
-            return true;
-          }
-          // under
-          else if(y < (this.board_size - 1) && this.board[y + 1][x] === current) {
-            return true;
-          }
-          // right
-          else if(x < (this.board_size - 1) && this.board[y][x + 1] === current) {
+          if(this.can_move_left(x, y) ||
+             this.can_move_right(x, y) ||
+             this.can_move_up(x, y) ||
+             this.can_move_down(x, y)) {
             return true;
           }
         }
@@ -142,25 +131,25 @@ var Board = (function() {
 
     // predicate to determine if a cell can move left
     can_move_left: function(x, y) {
-      if(this.board[y][x - 1] === 0) return true;
+      if(x > 0 && this.board[y][x - 1] === 0) return true;
       return x > 0 && this.board[y][x - 1] === this.board[y][x];
     },
 
     // predicate to determine if a cell can move right
     can_move_right: function(x, y) {
-      if(this.board[y][x + 1] === 0) return true;
+      if(x < (this.board_size - 1) && this.board[y][x + 1] === 0) return true;
       return x < (this.board_size - 1) && this.board[y][x + 1] === this.board[y][x];
     },
 
     // predicate to determine if a cell can move up
     can_move_up: function(x, y) {
-      if(this.board[y - 1][x] === 0) return true;
+      if(y > 0 && this.board[y - 1][x] === 0) return true;
       return y > 0 && this.board[y - 1][x] === this.board[y][x];
     },
 
     // predicate to determine if a cell can move down
     can_move_down: function(x, y) {
-      if(this.board[y + 1][x] === 0) return true;
+      if(y < (this.board_size - 1) && this.board[y + 1][x] === 0) return true;
       return y < (this.board_size - 1) && this.board[y + 1][x] === this.board[y][x];
     }
   };
