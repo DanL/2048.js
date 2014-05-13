@@ -143,6 +143,11 @@ var Board = (function() {
     // predicate to determine if a cell can move left
     can_move_left: function(x, y) {
       return x > 0 && this.board[y][x - 1] === this.board[y][x];
+    },
+
+    // predicate to determine if a cell can move right
+    can_move_right: function(x, y) {
+      return x < (this.board_size - 1) && this.board[y][x + 1] === this.board[y][x];
     }
   };
 

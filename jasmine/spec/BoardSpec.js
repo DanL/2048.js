@@ -231,4 +231,20 @@ describe('Board', function() {
       });
     });
   });
+
+  describe('#can_move_right', function() {
+    describe('when a cell can move right', function() {
+      it('returns true', function() {
+        board.board = [[0, 0, 0, 2, 2]];
+        expect(board.can_move_right(3, 0)).toEqual(true);
+      });
+    });
+
+    describe('when a cell cannot move right', function() {
+      it('returns false', function() {
+        board.board = [[0, 0, 0, 0, 2]];
+        expect(board.can_move_right(3, 0)).toEqual(false);
+      });
+    });
+  });
 });
