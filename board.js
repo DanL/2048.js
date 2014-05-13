@@ -142,12 +142,20 @@ var Board = (function() {
 
     // predicate to determine if a cell can move left
     can_move_left: function(x, y) {
+      if(this.board[y][x - 1] === 0) return true;
       return x > 0 && this.board[y][x - 1] === this.board[y][x];
     },
 
     // predicate to determine if a cell can move right
     can_move_right: function(x, y) {
+      if(this.board[y][x + 1] === 0) return true;
       return x < (this.board_size - 1) && this.board[y][x + 1] === this.board[y][x];
+    },
+
+    // predicate to determine if a cell can move up
+    can_move_up: function(x, y) {
+      if(this.board[y - 1][x] === 0) return true;
+      return y > 0 && this.board[y - 1][x] === this.board[y][x];
     }
   };
 

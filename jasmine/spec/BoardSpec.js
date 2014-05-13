@@ -247,4 +247,26 @@ describe('Board', function() {
       });
     });
   });
+
+  describe('#can_move_up', function() {
+    describe('when a cell can move up', function() {
+      it('returns true', function() {
+        board.board = [
+          [0, 0, 0, 0, 0],
+          [2, 0, 0, 0, 0]
+        ];
+        expect(board.can_move_up(0, 1)).toEqual(true);
+      });
+    });
+
+    describe('when a cell cannot move up', function() {
+      it('returns false', function() {
+        board.board = [
+          [2, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0]
+        ];
+        expect(board.can_move_up(0, 1)).toEqual(false);
+      });
+    });
+  });
 });
