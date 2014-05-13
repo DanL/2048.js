@@ -115,7 +115,9 @@ var Board = (function() {
       // always has a possible move if a tile is empty
       if(this.has_empty_tile()) return true;
 
+      // each row
       for(var y = 0; y < this.board_size; y++) {
+        // each cell
         for(var x = 0; x < this.board_size; x++) {
           if(this.can_move_left(x, y) ||
              this.can_move_right(x, y) ||
@@ -131,26 +133,30 @@ var Board = (function() {
 
     // predicate to determine if a cell can move left
     can_move_left: function(x, y) {
-      if(x > 0 && this.board[y][x - 1] === 0) return true;
-      return x > 0 && this.board[y][x - 1] === this.board[y][x];
+      if(!(x > 0)) return false;
+      if(this.board[y][x - 1] === 0) return true;
+      return this.board[y][x - 1] === this.board[y][x];
     },
 
     // predicate to determine if a cell can move right
     can_move_right: function(x, y) {
-      if(x < (this.board_size - 1) && this.board[y][x + 1] === 0) return true;
-      return x < (this.board_size - 1) && this.board[y][x + 1] === this.board[y][x];
+      if(!(x < (this.board_size - 1))) return false;
+      if(this.board[y][x + 1] === 0) return true;
+      return this.board[y][x + 1] === this.board[y][x];
     },
 
     // predicate to determine if a cell can move up
     can_move_up: function(x, y) {
-      if(y > 0 && this.board[y - 1][x] === 0) return true;
-      return y > 0 && this.board[y - 1][x] === this.board[y][x];
+      if(!(y > 0)) return false;
+      if(this.board[y - 1][x] === 0) return true;
+      return this.board[y - 1][x] === this.board[y][x];
     },
 
     // predicate to determine if a cell can move down
     can_move_down: function(x, y) {
-      if(y < (this.board_size - 1) && this.board[y + 1][x] === 0) return true;
-      return y < (this.board_size - 1) && this.board[y + 1][x] === this.board[y][x];
+      if(!(y < (this.board_size - 1))) return false;
+      if(this.board[y + 1][x] === 0) return true;
+      return this.board[y + 1][x] === this.board[y][x];
     }
   };
 
