@@ -269,4 +269,26 @@ describe('Board', function() {
       });
     });
   });
+
+  describe('#can_move_down', function() {
+    describe('when a cell can move down', function() {
+      it('returns true', function() {
+        board.board = [
+          [2, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0]
+        ];
+        expect(board.can_move_down(0, 0)).toEqual(true);
+      });
+    });
+
+    describe('when a cell cannot move down', function() {
+      it('returns false', function() {
+        board.board = [
+          [0, 0, 0, 0, 0],
+          [2, 0, 0, 0, 0]
+        ];
+        expect(board.can_move_down(0, 0)).toEqual(false);
+      });
+    });
+  });
 });

@@ -156,6 +156,12 @@ var Board = (function() {
     can_move_up: function(x, y) {
       if(this.board[y - 1][x] === 0) return true;
       return y > 0 && this.board[y - 1][x] === this.board[y][x];
+    },
+
+    // predicate to determine if a cell can move down
+    can_move_down: function(x, y) {
+      if(this.board[y + 1][x] === 0) return true;
+      return y < (this.board_size - 1) && this.board[y + 1][x] === this.board[y][x];
     }
   };
 
