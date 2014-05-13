@@ -27,19 +27,20 @@ var Game = (function() {
       return this.board.contains(2048);
     },
 
-    // if this returns false, the game is over
+    // if this returns false, nothing has changed
     move: function(direction) {
-      var original_board = this.board.board.join();
+      var original_board = _.flatten(this.board.board);
 
       this[direction]();
 
-      if(this.board.has_empty_tile()) {
-        // determines if the board has changed at all for the current turn
-        // if it hasn't, a new random tile is not added
-        if(this.board.board.join() != original_board) {
-          this.current_points += this.calculate_points(original_board, this.board.board);
-          this.board.set_random_empty_tile();
-        }
+      var current_board = _.flatten(this.board.board);
+
+      // determines if the board has changed at all for the current turn
+      // if it hasn't, a new random tile is not added, and the score is not modified
+      if(this.board.has_possible_move() &&
+         current_board.join() != original_board.join()) {
+        this.current_points += this.calculate_points(original_board, current_board);
+        this.board.set_random_empty_tile();
 
         return true;
       }
@@ -62,8 +63,7 @@ var Game = (function() {
         return new_array;
       }
 
-      var new_array = diff(_.flatten(original_board),
-                           _.flatten(current_board));
+      var new_array = diff(original_board, current_board);
 
       return _.reduce(new_array, function(sum, num) {
         return sum + num;

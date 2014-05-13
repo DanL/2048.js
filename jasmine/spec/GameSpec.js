@@ -46,53 +46,44 @@ describe('Game', function() {
       expect(game.left).toHaveBeenCalled();
     });
 
-    describe('when the board has an empty tile', function() {
-      describe('when moving the board results in a change', function() {
-        it('spawns a random tile', function() {
-          game.board.board = [
-            [0, 2, 0, 0, 0],
-            [0, 2, 0, 0, 0],
-            [0, 2, 0, 0, 0],
-            [0, 2, 0, 0, 0],
-            [0, 2, 0, 0, 0]
-          ];
+    describe('when moving the board results in a change', function() {
+      it('spawns a random tile', function() {
+        game.board.board = [
+          [0, 2, 0, 0, 0],
+          [0, 2, 0, 0, 0],
+          [0, 2, 0, 0, 0],
+          [0, 2, 0, 0, 0],
+          [0, 2, 0, 0, 0]
+        ];
 
-          spyOn(game.board, 'set_random_empty_tile').and.callThrough();
-          game.move('left');
-          expect(game.board.set_random_empty_tile).toHaveBeenCalled();
-        });
+        spyOn(game.board, 'set_random_empty_tile').and.callThrough();
+        game.move('left');
+        expect(game.board.set_random_empty_tile).toHaveBeenCalled();
       });
 
-      describe('when moving the board does not result in a change', function() {
-        it('does not spawn a random tile', function() {
-          game.board.board = [
-            [2, 0, 0, 0, 0],
-            [2, 0, 0, 0, 0],
-            [2, 0, 0, 0, 0],
-            [2, 0, 0, 0, 0],
-            [2, 0, 0, 0, 0]
-          ];
+      it('adds points for any merged tiles', function() {
+        game.board.board = [
+          [2, 2, 0, 0, 0],
+          [0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0]
+        ];
 
-          spyOn(game.board, 'set_random_empty_tile').and.callThrough();
-          game.move('left');
-          expect(game.board.set_random_empty_tile).not.toHaveBeenCalled();
-        });
-      });
-
-      it('returns true', function() {
-        expect(game.move('left')).toEqual(true);
+        game.move('left');
+        expect(game.current_points).toEqual(4);
       });
     });
 
-    describe('when the board has no empty tiles', function() {
+    describe('when the board has no possible moves', function() {
       it('returns false', function() {
-        // this board has no left-mergeable tiles
+        // this board has no mergeable tiles
         game.board.board = [
-          [2, 4, 8, 16, 32],
-          [2, 4, 8, 16, 32],
-          [2, 4, 8, 16, 32],
-          [2, 4, 8, 16, 32],
-          [2, 4, 8, 16, 32]
+          [2, 4, 2, 4, 2],
+          [4, 2, 4, 2, 4],
+          [2, 4, 2, 4, 2],
+          [4, 2, 4, 2, 4],
+          [2, 4, 2, 4, 2]
         ];
 
         expect(game.move('left')).toEqual(false);
@@ -102,21 +93,21 @@ describe('Game', function() {
 
   describe('#calculate_points', function() {
     it('returns the sum of all changes to the new board, excluding the randomly generated number', function() {
-      game.board.board = [
+      game.board.board = _.flatten([
         [8, 2, 0, 0, 0],
         [0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0]
-      ];
+      ]);
 
-      var original_board = [
+      var original_board = _.flatten([
         [4, 4, 2, 0, 0],
         [0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0]
-      ];
+      ]);
 
       expect(game.calculate_points(original_board, game.board.board)).toEqual(8);
     });
